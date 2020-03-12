@@ -1,4 +1,5 @@
 var redirect_uri = "https://open.spotify.com/collection/playlists" 
+var baseURL = "https://api.spotify.com/v1"
 
 // lock = divi
 var scopes = 'playlist-read-private playlist-read-collaborative playlist-modify-public';
@@ -65,17 +66,32 @@ export function makePlaylist(name, user_id, access_token) {
     body = { "name": name }
     post("https://api.spotify.com/v1/users/" + user_id + "/playlists", body, access_token)
     // add verification here
-    // lock = divi
 }
 
 export function getUserPlaylists(user_id, public, access_token) {
-
+    data = get(baseURL + "/users/" + user_id + "/playlists");
+    console.log(data);
 }
 
 export function getPlaylistList(user_id, public, access_token) {
 
 }
 
-export function getTracks(track_url, access_token) {
+export function getTracksFromPlaylist(track_url, access_token) {
+    // TODO
+    tracks = get(track_url, access_token)
+    return tracks['items']
+}
 
+export function getAllSongsForUser(user_id, public, access_token) {
+    // should be set
+    var tracks = []
+
+    var playlist_list_data = getPlaylistList(user_id, public, access_token)
+    playlist_list_data = playlist_list_data['items'];
+    for (let i = 0; i < length(playlist_list_data); i++) {
+        playlist = playlist_list_data[i]
+        track_url = playlist['tracks']['href']
+        tracks += getTracksFromPlaylist(track_url, access_token)
+    }
 }
