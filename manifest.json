@@ -9,7 +9,10 @@
           ],
           "js": ["content.js"]
         }
-      ],
+    ],
+    "permissions": [
+        "https://api.spotify.com/v1"
+    ],
     "browser_action": {
         "default_icon": "spotify.png"
     }, 
