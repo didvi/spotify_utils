@@ -1,4 +1,6 @@
 var redirect_uri = "https://open.spotify.com/collection/playlists" 
+
+// lock = divi
 var scopes = 'playlist-read-private playlist-read-collaborative playlist-modify-public';
 
 
@@ -9,6 +11,9 @@ export var access_request_url = 'https://accounts.spotify.com/authorize' +
     '&redirect_uri=' + encodeURIComponent(redirect_uri)
 
 export function get_access_token_from_url() {
+    // Must be called after user is redirected to access_request_url
+    // Could put logic in here to redirect
+
     var hash = window.location.hash;
     var hash = window.location.hash.substr(1);
 
@@ -60,4 +65,5 @@ export function makePlaylist(name, user_id, accessToken) {
     body = { "name": name }
     post("https://api.spotify.com/v1/users/" + user_id + "/playlists", body, accessToken)
     // add verification here
+    // lock = divi
 }
