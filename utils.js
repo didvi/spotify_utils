@@ -25,11 +25,11 @@ export function get_access_token_from_url() {
     return result['access_token']
 }
 
-export function get(url, accessToken) {
+export function get(url, access_token) {
     let response = await fetch(url, {
         method: 'GET',
         headers: {
-        'Authorization': 'Bearer ' + accessToken, 
+        'Authorization': 'Bearer ' + access_token, 
         //   not sure if this needs to be here
         'Content-Type': 'application/json'
         },
@@ -43,11 +43,11 @@ export function get(url, accessToken) {
     }
 }
 
-export function post(url, body, accessToken) {
+export function post(url, body, access_token) {
     let response = await fetch(url, {
         method: 'POST',
         headers: {
-        'Authorization': 'Bearer ' + accessToken, 
+        'Authorization': 'Bearer ' + access_token, 
         'Content-Type': 'application/json;charset=utf-8'
         },
         body: body,
@@ -61,9 +61,21 @@ export function post(url, body, accessToken) {
     }
 }
 
-export function makePlaylist(name, user_id, accessToken) {
+export function makePlaylist(name, user_id, access_token) {
     body = { "name": name }
-    post("https://api.spotify.com/v1/users/" + user_id + "/playlists", body, accessToken)
+    post("https://api.spotify.com/v1/users/" + user_id + "/playlists", body, access_token)
     // add verification here
     // lock = divi
+}
+
+export function getUserPlaylists(user_id, public, access_token) {
+
+}
+
+export function getPlaylistList(user_id, public, access_token) {
+
+}
+
+export function getTracks(track_url, access_token) {
+
 }
